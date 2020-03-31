@@ -7,4 +7,4 @@ NumPy contents:
 - Join / Split
 - Sort
 - Search
-- Filter
+- Filters
