@@ -49,6 +49,21 @@ x = np.arange(-2,3)
 
 # ----------stacking-----------------
 print("array stacking")
-array_d = np.arange(6).reshape(2,31)
+array_d = np.arange(6).reshape(2,3)
 print(array_d)
 print(array_d.shape)
+
+# --------Seaborn module-------
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sbs
+
+sbs.distplot(random.normal(loc=100, scale=5, size=1000),hist=False, label='Normal') #histogram = t/f
+sbs.distplot(random.binomial(n = 100, p=0.5, size=1000),hist=False, label='Binomial')
+plt.show()
+
+# # Generate a random normal distribution of size 2x3 with mean at 1 and standard deviation of 2:
+# x = random.normal(loc=1, scale=2, size=(2, 3))
+# sbs.distplot(x, hist=True)
+# plt.show()
+
