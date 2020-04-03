@@ -49,6 +49,6 @@ x = np.arange(-2,3)
 
 # ----------stacking-----------------
 print("array stacking")
-array_d = np.arange(6).reshape(2,3,1)
+array_d = np.arange(6).reshape(2,31)
 print(array_d)
 print(array_d.shape)

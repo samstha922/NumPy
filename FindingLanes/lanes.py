@@ -2,9 +2,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-image = cv2.imread('test_image.jpg')
-lane_image = np.copy(image) #creating a copy of the image
-
 # return the image in color optimized format with edge: white and others: black
 def canny(image):
     grayscale= cv2.cvtColor(image, cv2.COLOR_RGB2GRAY) #change to grayscale
@@ -66,17 +63,39 @@ def display_lines(image, lines):
             x1, y1, x2, y2 = line.reshape(4)
             cv2.line(line_image, (x1,y1), (x2,y2), (255,0,0), 10) #color RGB format; its inverse in cv2
     return line_image
-canny_image = canny(lane_image)
-triangle_image = region_of_interest(canny_image) # create ROI of traingle vs white lines
 
-# Hough transform to detect the lane of the image
-# Hough linesP ()
-lines = cv2.HoughLinesP(triangle_image,2,np.pi/180, 100, np.array([]), minLineLength= 40, maxLineGap=5)
-averaged_lines = average_slope_intercept(lane_image,lines)
-line_image = display_lines(lane_image,averaged_lines)
-combo_image = cv2.addWeighted(lane_image, 0.8, line_image, 1, 1)
+# image = cv2.imread('test_image.jpg') #reading the image
+# lane_image = np.copy(image) #creating a copy of the image
+# canny_image = canny(lane_image)
+# triangle_image = region_of_interest(canny_image) # create ROI of traingle vs white lines
+# # Hough transform to detect the lane of the image
+# lines = cv2.HoughLinesP(triangle_image,2,np.pi/180, 100, np.array([]), minLineLength= 40, maxLineGap=5)
+# averaged_lines = average_slope_intercept(lane_image,lines)
+# line_image = display_lines(lane_image,averaged_lines)
+# combo_image = cv2.addWeighted(lane_image, 0.8, line_image, 1, 1)
+# # show in cv2 plot library
+# cv2.imshow("result", combo_image)
+# cv2.waitKey(0) #display image for some time; 0 = keep displaying
 
-
+# import the video
+cap = cv2.VideoCapture("test2.mp4")
+while(cap.isOpened()):
+    _, frame = cap.read() # first value: blank(boolean) second: current frame
+    canny_image = canny(frame)
+    triangle_image = region_of_interest(canny_image) # create ROI of traingle vs white lines
+    # Hough transform to detect the lane of the image
+    lines = cv2.HoughLinesP(triangle_image,2,np.pi/180, 100, np.array([]), minLineLength= 40, maxLineGap=5)
+    averaged_lines = average_slope_intercept(frame,lines)
+    line_image = display_lines(frame,averaged_lines)
+    combo_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
+    # show in cv2 plot library
+    cv2.imshow("result", combo_image)
+    if cv2.waitKey(1) & 0xFF == ord('q'):#display image for some time; 0 = keep displaying..... 0xFF : when key input is q then break
+        break
+    elif cv2.waitKey(1) & (cv2.getWindowProperty("result", cv2.WND_PROP_VISIBLE) < 1): #close the window when window close button is clicked
+        break
+cap.release()  # release capture and close all the windows
+cv2.destroyAllWindows()
 # # show in matplotlib
 # plt.imshow(combo_image)
 # plt.show()
@@ -85,6 +104,3 @@ combo_image = cv2.addWeighted(lane_image, 0.8, line_image, 1, 1)
 # cv2.imshow("result", region_of_interest(triangle_image))
 # cv2.imshow("result",triangle_image)
 
-# show in cv2 plot library
-cv2.imshow("result", combo_image)
-cv2.waitKey(0) #display image for some time; 0 = keep displaying
