@@ -41,3 +41,14 @@ print(arr2)
 
 
 # -----------array split// in notes-------------
+print('array splitting')
+arr_c=np.array([[[4,5,6],[7,8,9]],[[10,11,12],[1,2,3],[4,5,6]]])
+arr3= np.array_split(arr_c,2)
+print(arr3)
+x = np.arange(-2,3)
+
+# ----------stacking-----------------
+print("array stacking")
+array_d = np.arange(6).reshape(2,3,1)
+print(array_d)
+print(array_d.shape)
