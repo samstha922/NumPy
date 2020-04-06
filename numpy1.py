@@ -80,8 +80,8 @@ y = [99,86,87,88,111,86,103,87,94,78,77,85,86]
 slope, intercept, r, p, std_err = stats.linregress(x, y)
 print(stats.linregress(x,y))
 def myfunc(x):
-    return slope * x+ intercept
-myModel = list(map(myfunc,x))
-plt.scatter(x,y)
-plt.plot(x,myModel)
+    return slope * x+ intercept # y = mx+c
+myModel = list(map(myfunc,x)) #every function of x is mapped with value of x
+plt.scatter(x,y) #plots original function
+plt.plot(x,myModel) #plots the line of regresssion
 plt.show()
