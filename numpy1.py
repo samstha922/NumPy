@@ -1,5 +1,13 @@
 # Numpy array iteration and array join and split
 import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.random.normal(5.0, 1.0, 1000)
+y = np.random.normal(10.0, 2.0, 1000)
+
+plt.scatter(x, y)
+plt.show()
+
 arr = np.array([[[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]]])
 # iteration of each element in 3d array
 # for a in arr:
@@ -49,6 +57,7 @@ x = np.arange(-2,3)
 
 # ----------stacking-----------------
 print("array stacking")
-array_d = np.arange(6).reshape(2,31)
+array_d = np.arange(6).reshape(2,3)
 print(array_d)
 print(array_d.shape)
+
